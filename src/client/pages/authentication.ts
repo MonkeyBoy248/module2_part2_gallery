@@ -1,6 +1,6 @@
-import * as tokenManagement from "../modules/token_management";
-import { authenticationServerUrl, galleryUrl, currentUrl } from "../modules/environment_variables";
-import * as eventListenersManagement from "../modules/event_listeners_management";
+import * as tokenManagement from "../../modules/tokenManagement";
+import { authenticationServerUrl, galleryUrl, currentUrl } from "../../modules/environmentVariables";
+import * as eventListenersManagement  from "../../modules/eventListenersManagement";
 
 const loginForm = document.forms?.namedItem("login");
 const emailInput = loginForm?.elements.namedItem("email") as HTMLInputElement;

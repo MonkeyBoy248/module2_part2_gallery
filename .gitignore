@@ -6,3 +6,8 @@ tsconfig.json
 package.json
 package-lock.json
 .editorconfig
+authorized_users.ts
+resources/
+.env
+environmentVariables.ts
+serverVariables.ts
