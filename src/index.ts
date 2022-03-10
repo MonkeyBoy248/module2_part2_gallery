@@ -44,19 +44,18 @@ const server = createServer((req, res) => {
     if (req.method === 'GET') {
       if (req.headers.authorization === 'token') {
         const requestUrlParams = parse(req.url, true).query;
-        let currentPage = 1;
-
-        if (requestUrlParams['page']) {
-          currentPage = Number(requestUrlParams['page']);
-        }
+        let currentPage = requestUrlParams['page'] ? Number(requestUrlParams['page']) : 1;
 
         galleryResponse.getPictures(galleryResponse.apiImagesPath)
           .then(files => {
             const objects = files;
             const total = galleryResponse.countTotalPagesAmount(objects);
-            const response = galleryResponse.createGalleryResponse(objects, total, currentPage);
-            res.writeHead(200, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify(response));
+
+            if (currentPage <= total && currentPage > 0) {
+              const response = galleryResponse.createGalleryResponse(objects, total, currentPage);
+              res.writeHead(200, {'Content-Type': 'application/json'});
+              res.end(JSON.stringify(response));
+            }
         }) 
       } else {
         res.writeHead(403, {'Content-Type': 'application/json'})
