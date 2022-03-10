@@ -33,7 +33,8 @@ export function getTargetPageFile (req: IncomingMessage, res: ServerResponse) {
   if (req.url) {
     console.log(req.url);
     let contentType = 'text/html';
-    const filePath = path.join('build', 'client', 'pages', req.url === '/' ? 'authentication.html' : `${req.url}`);
+    const requstedFileName = req.url.includes('?') ? req.url.slice(0, req.url.lastIndexOf('?')) : req.url;
+    const filePath = path.join('build', 'client', 'pages', req.url === '/' ? 'authentication.html' : `${requstedFileName}`);
     const fileExtension = path.extname(filePath);
 
     switch(fileExtension) {
@@ -50,8 +51,14 @@ export function getTargetPageFile (req: IncomingMessage, res: ServerResponse) {
         contentType = 'image/png';
         break
       case '.jpg': 
-        contentType = 'image/jpg';
+        contentType = 'image/jpeg';
         break
+      case '.jpeg': 
+        contentType = 'image/jpeg';
+      break
+      case '.webp':
+        contentType = 'image/webp';
+      break
     }
     console.log(filePath);
     console.log(contentType);
