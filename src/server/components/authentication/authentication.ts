@@ -2,6 +2,7 @@ import { Authorized } from "./authenticationAuthorizedList";
 import { authorized_users as authorized } from "./authenticationAuthorizedList";
 import { User } from "../../../modules/user";
 
+
 export class Authentication {
   private static user: Authorized;
 
@@ -20,9 +21,5 @@ export class Authentication {
     }
 
     return true;
-  }
-
-  static showUser () {
-    console.log(this.user);
   }
 }
