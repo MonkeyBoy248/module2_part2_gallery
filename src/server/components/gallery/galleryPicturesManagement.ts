@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import { Gallery } from './gallery';
 
-export const apiImagesPath = 'resources/api_images'
-const picturesPerPage = 3;
+export const apiImagesPath = 'build/client/pages/resources/api_images';
+const picturesPerPage = 4;
 
 export async function getPictures (path: string) {
   const files = await fs.promises.readdir(path);
