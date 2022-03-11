@@ -39,11 +39,11 @@ MODULE2_PART2_GALLERY
 
 2. You have to log in. After filling the fields in click log in button to authorize
 
-![Log in form](./build/client/pages/resources/assets/login_form.png)
+![Log in form](build/client/pages/resources/assets/login_form.png)
 
 3. You can navigate through pages using this simple links bar
 
-![Gallery](./build/client/pages/resources/assets/disco_gallery.png)
+![Gallery](build/client/pages/resources/assets/disco_gallery.png)
 
 4. Enjoy!
 
