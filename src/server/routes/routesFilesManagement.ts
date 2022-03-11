@@ -8,7 +8,7 @@ const isNodeError = (error: Error | unknown): error is NodeJS.ErrnoException =>
 
 async function readerErrorHandler (err: NodeJS.ErrnoException, res: ServerResponse) {  
   if (err.code === 'ENOENT') {
-    const content = await reader(path.join('build', 'client', 'pages', '404.html'));
+    const content = await reader(path.join(__dirname.slice(0, __dirname.indexOf('/build')), 'pages', 'views', '404.html'));
     return content;
   } else {
     return `Server error: ${err.code}`;
@@ -28,12 +28,24 @@ async function readPageFile (filePath: string, res: ServerResponse, contentType:
     }
   }
 }
+
+function getCorrectPath (req: string): string {
+  const filteredRequest = req.includes('?') ? req.slice(0, req.lastIndexOf('?')) : req;
+  const extension = filteredRequest.slice(req.indexOf('.'));
+
+  if (extension === '.html') {
+    return `pages/views${filteredRequest}`;
+  }
+  
+  return filteredRequest;
+}
     
 export function getTargetPageFile (req: IncomingMessage, res: ServerResponse) {
   if (req.url) {
     let contentType = 'text/html';
-    const requstedFileName = req.url.includes('?') ? req.url.slice(0, req.url.lastIndexOf('?')) : req.url;
-    const filePath = path.join('build', 'client', 'pages', req.url === '/' ? 'authentication.html' : `${requstedFileName}`);
+    const requstedFileName = getCorrectPath(req.url);
+    const filePath = path.join(__dirname.slice(0, __dirname.indexOf('/build')), req.url === '/' ? 'pages/views/authentication.html' : `${requstedFileName}`);
+    console.log(filePath);
     const fileExtension = path.extname(filePath);
 
     switch(fileExtension) {
