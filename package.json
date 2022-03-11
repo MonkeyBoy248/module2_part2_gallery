@@ -6,13 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.ts",
-    "start": "nodemon build/index.js"
+    "start": "tsc && nodemon build/index.js"
   },
   "author": "Kirill Temnyi",
   "license": "ISC",
-  "dependencies": {
-    "generate-password": "^1.7.0"
-  },
   "devDependencies": {
     "@types/node": "^17.0.21",
     "nodemon": "^2.0.15",
