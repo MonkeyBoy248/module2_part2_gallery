@@ -31,7 +31,6 @@ async function readPageFile (filePath: string, res: ServerResponse, contentType:
     
 export function getTargetPageFile (req: IncomingMessage, res: ServerResponse) {
   if (req.url) {
-    console.log(req.url);
     let contentType = 'text/html';
     const requstedFileName = req.url.includes('?') ? req.url.slice(0, req.url.lastIndexOf('?')) : req.url;
     const filePath = path.join('build', 'client', 'pages', req.url === '/' ? 'authentication.html' : `${requstedFileName}`);
@@ -60,8 +59,6 @@ export function getTargetPageFile (req: IncomingMessage, res: ServerResponse) {
         contentType = 'image/webp';
       break
     }
-    console.log(filePath);
-    console.log(contentType);
     readPageFile(filePath, res, contentType);
   }
 }

@@ -12,11 +12,9 @@ export class Authentication {
 
   static isThisCorrectUser (user: User): boolean {
     if (!authorized[user.email]) {
-      console.log(`first false: ${authorized[user.email]}`)
       return false;
     }
     if (authorized[user.email] !== user.password) {
-      console.log(`second false: ${authorized[user.email]}`)
       return false;
     }
 

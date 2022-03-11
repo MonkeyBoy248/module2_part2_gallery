@@ -26,7 +26,7 @@ async function getPicturesData (url: string): Promise<void>{
       })
     
       const data: GalleryData = await response.json();
-      console.log(data);
+      
       createPictureTemplate(data);
       createLinksTemplate(data.total);
       setPageNumber();
