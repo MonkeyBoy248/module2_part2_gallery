@@ -1,6 +1,8 @@
 const port = 5000;
-const authenticationServerUrl = `http://localhost:${port}/authentication`;
-const galleryServerUrl = `http://localhost:${port}/gallery`;
+const protocol = 'http';
+const hostName = 'localhost';
+const authenticationServerUrl = `${protocol}://${hostName}:${port}/authentication`;
+const galleryServerUrl = `${protocol}://${hostName}:${port}/gallery`;
 const galleryUrl = `index.html`;
 const loginUrl = `authentication.html`;
 const currentUrl = new URL(window.location.href);

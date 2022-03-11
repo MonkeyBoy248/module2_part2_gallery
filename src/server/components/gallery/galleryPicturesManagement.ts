@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { Gallery } from './gallery';
 
-export const apiImagesPath = 'build/client/pages/resources/api_images';
+export const apiImagesPath = 'resources/api_images';
 const picturesPerPage = 4;
 
 export async function getPictures (path: string) {

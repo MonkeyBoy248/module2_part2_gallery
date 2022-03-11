@@ -44,7 +44,7 @@ function createPictureTemplate (pictures: GalleryData): void {
     const imageWrapper = picture.children[0];
     const image = imageWrapper.querySelector('.gallery__img') as HTMLElement;
     
-    image.setAttribute('src', `./resources/api_images/${object}`);
+    image.setAttribute('src', `resources/api_images/${object}`);
     galleryPhotos.insertAdjacentElement('beforeend', imageWrapper);
   }
 }
