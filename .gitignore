@@ -4,9 +4,7 @@ node_modules
 build/
 tsconfig.json
 package.json
-package-lock.json
 .editorconfig
 authorized_users.ts
-.env
 environmentVariables.ts
 serverVariables.ts
