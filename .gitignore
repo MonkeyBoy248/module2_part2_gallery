@@ -2,9 +2,4 @@ node_modules
 .vs_code/
 .idea/
 build/
-tsconfig.json
-package.json
 .editorconfig
-authorized_users.ts
-environmentVariables.ts
-serverVariables.ts
