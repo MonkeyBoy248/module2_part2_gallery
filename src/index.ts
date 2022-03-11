@@ -2,15 +2,9 @@ import { createServer } from "http";
 import { parse } from "url";
 import { Authentication } from "./server/components/authentication/authentication";
 import { User } from "./modules/user";
-import { AuthenticationErrorMessage, Token } from "./modules/tokenManagement";
 import * as galleryResponse from "./server/components/gallery/galleryPicturesManagement";
-import { port } from "./modules/serverVariables";
+import { port, token, errorMessage } from "./modules/serverVariables";
 import { getTargetPageFile } from "./server/routes/routesFilesManagement";
-
-
-const token: Token = {token: 'token'};
-const errorMessage: AuthenticationErrorMessage = {errorMessage: 'Invalid user data'};
-
 
 const server = createServer((req, res) => {
   getTargetPageFile(req, res);
