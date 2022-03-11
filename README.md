@@ -35,17 +35,21 @@ MODULE2_PART2_GALLERY
 
 ## Usage ##
 
-1. Enter `localhost:5000` in your browser search bar
+1. Download project folder
 
-2. You have to log in. After filling the fields in click log in button to authorize
+2. Run 'npm run start' command 
+
+3. Enter `localhost:5000` in your browser search bar
+
+4. You have to log in. After filling the fields in click log in button to authorize
 
 ![Log in form](resources/assets/login_form.png)
 
-3. You can navigate through pages using this simple links bar
+5. You can navigate through pages using this simple links bar
 
 ![Gallery](resources/assets/disco_gallery.png)
 
-4. Enjoy!
+6. Enjoy!
 
 ## Authors and contacts ##
 
