@@ -4,6 +4,7 @@ const pagesLinksList = document.querySelector('.gallery__links-list') as HTMLEle
 const galleryErrorMessage = document.querySelector('.gallery__error-message') as HTMLElement;
 const galleryPopup = document.querySelector('.gallery__error-pop-up') as HTMLElement;
 const galleryLinkTemplate = document.querySelector('.gallery__link-template') as HTMLTemplateElement;
+const galleryErrorRedirectBtn = document.querySelector('.gallery__error-redirect-button') as HTMLElement
 const galleryEventsArray: CustomEventListener[] = [
   {target: document, type: 'DOMContentLoaded', handler: getCurrentPageImages},
   {target: pagesLinksList, type: 'click', handler: changeCurrentPage},
@@ -24,15 +25,45 @@ async function getPicturesData (url: string): Promise<void>{
           Authorization: getToken().token,
         },
       })
-    
+      
+      if (response.status === 403) {
+        throw new TokenError();
+      }
+
       const data: GalleryData = await response.json();
       
       createPictureTemplate(data);
       createLinksTemplate(data.total);
       setPageNumber();
-    } catch {
-      showMessage(`There is no page with number ${url.slice(url.indexOf('=') + 1)}. Please, enter a new value in the address bar`);
+    } catch (err){
+        if (err instanceof SyntaxError) {
+          const nonexistentPageNumber = url.slice(url.indexOf('=') + 1);
+          
+          createErrorMessageTemplate(
+            `There is no page with number ${nonexistentPageNumber}.`, 
+            'wrong-page-number',
+            'page 1'
+          )
+        } else {
+          createErrorMessageTemplate(
+            'Invalid token. Please, log in',
+            'invalid-token',
+            'authentication page'
+          );
+        }
+
+        console.log(err);
     }
+  }
+}
+
+function setErrorRedirectionTarget (e: Event) {
+  const target = e.target as HTMLElement;
+
+  if (target.getAttribute('error-type') === 'wrong-page-number') {
+    window.location.replace('index.html?page=1')
+  } else {
+    window.location.replace(`authentication.html?currentPage=${currentUrl.searchParams.get('page')}`);
   }
 }
 
@@ -64,6 +95,12 @@ function createLinksTemplate (total: number): void {
     }
   }
 }
+
+function createErrorMessageTemplate (message: string, errType: string, targetPage: string) {
+  galleryErrorRedirectBtn.textContent += targetPage;
+  galleryErrorRedirectBtn.setAttribute('error-type', errType);
+  showMessage(message);
+} 
 
 function setNewUrl (params: URLSearchParams | string): void {
   window.location.href = window.location.origin + window.location.pathname + `?page=${params}`;
@@ -140,6 +177,7 @@ function changeCurrentPage (e: Event): void {
 
 document.addEventListener('DOMContentLoaded', getCurrentPageImages);
 pagesLinksList.addEventListener('click', changeCurrentPage);
+galleryErrorRedirectBtn.addEventListener('click', setErrorRedirectionTarget);
 
 setInterval(() => {
   deleteToken();
