@@ -190,3 +190,19 @@ body.block {
   color: rgb(240, 150, 16);
 }
 
+.gallery__error-redirect-button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #d059e7;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+
+.gallery__error-redirect-button:hover {
+  background-color: #e9982d;
+}
+
