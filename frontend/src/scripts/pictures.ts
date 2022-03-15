@@ -19,7 +19,7 @@ interface GalleryData {
 
 async function getPicturesData (url: string): Promise<void>{
   const tokenObject = Token.getToken();
-  const tokenProperty = tokenObject.token;
+  const tokenProperty = tokenObject?.token;
 
   if (tokenObject) {
     try {
