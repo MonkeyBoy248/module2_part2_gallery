@@ -175,7 +175,6 @@ function changeCurrentPage (e: Event): void {
   const currentActiveLink = pagesLinksList.querySelector('.active');
   e.preventDefault();
   const target = e.target as HTMLElement;
-  console.log(target);
   const targetClosestLi = target.closest('li');
 
   if (target !== pagesLinksList ) {
