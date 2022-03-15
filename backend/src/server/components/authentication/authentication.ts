@@ -4,8 +4,6 @@ import { User } from "../../../modules/user";
 
 
 export class Authentication {
-  private static user: Authorized;
-
   static isThisCorrectUser (user: User): boolean {
     if (!authorized[user.email]) {
       return false;

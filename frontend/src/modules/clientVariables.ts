@@ -31,24 +31,24 @@ function redirectToTheGalleryPage () {
 }
 
 class Token {
-  private static tokenKey: string = 'token';
+  private static TOKEN_KEY: string = 'token';
 
   static getToken (): TokenObject {
-    return JSON.parse(localStorage.getItem(Token.tokenKey) || 'null');
+    return JSON.parse(localStorage.getItem(Token.TOKEN_KEY) || 'null');
   }
   
   static getTokenTimestamp (): number {
-    return JSON.parse(localStorage.getItem(Token.tokenKey) || 'null');
+    return JSON.parse(localStorage.getItem(Token.TOKEN_KEY) || 'null');
   }
   
   static setToken (token: TokenObject): void {
     token.timestamp = Date.now();
-    localStorage.setItem(Token.tokenKey, JSON.stringify(token));
+    localStorage.setItem(Token.TOKEN_KEY, JSON.stringify(token));
   }
   
   static deleteToken (): void {
     if (Date.now() - Token.getTokenTimestamp() >= 600000) {
-      localStorage.removeItem(Token.tokenKey);
+      localStorage.removeItem(Token.TOKEN_KEY);
     }
   }
 }
