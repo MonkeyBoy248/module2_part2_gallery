@@ -1,4 +1,5 @@
 const homeLink = document.querySelector('.content__home-link');
+homeLink?.addEventListener('click', homeRedirection);
 
 function homeRedirection (e: Event) {
   e.preventDefault();
@@ -11,5 +12,5 @@ function homeRedirection (e: Event) {
   }
 }
 
-homeLink?.addEventListener('click', homeRedirection);
+
 
