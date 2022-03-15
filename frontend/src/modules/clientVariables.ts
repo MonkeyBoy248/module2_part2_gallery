@@ -1,0 +1,86 @@
+const port = 5000;
+const protocol = 'http';
+const hostName = 'localhost';
+const authenticationServerUrl = `${protocol}://${hostName}:${port}/authentication`;
+const galleryServerUrl = `${protocol}://${hostName}:${port}/gallery`;
+const galleryUrl = `index.html`;
+const loginUrl = `authentication.html`;
+const currentUrl = new URL(window.location.href);
+
+interface CustomEventListener {
+  target: HTMLElement | Window | Document;
+  type: string; 
+  handler: EventListenerOrEventListenerObject;
+}
+
+class ListenerRemover {
+  static removeEventListeners (listeners: CustomEventListener[]) {
+    for (let listener of listeners) {
+      listener.target.removeEventListener(listener.type, listener.handler);
+    }
+  }
+}
+
+function redirectToTheGalleryPage () {
+  const currentPage = currentUrl.searchParams.get('currentPage');
+  if (!currentPage) {
+    window.location.replace(`${galleryUrl}?page=1`)
+  } else {
+    window.location.replace(`${galleryUrl}?page=${currentPage}`)
+  }
+}
+
+class Token {
+  private static tokenKey: string = 'token';
+
+  static getToken (): TokenObject {
+    return JSON.parse(localStorage.getItem(Token.tokenKey) || 'null');
+  }
+  
+  static getTokenTimestamp (): number {
+    return JSON.parse(localStorage.getItem(Token.tokenKey) || 'null');
+  }
+  
+  static setToken (token: TokenObject): void {
+    token.timestamp = Date.now();
+    localStorage.setItem(Token.tokenKey, JSON.stringify(token));
+  }
+  
+  static deleteToken (): void {
+    if (Date.now() - Token.getTokenTimestamp() >= 600000) {
+      localStorage.removeItem(Token.tokenKey);
+    }
+  }
+}
+
+interface TokenObject {
+  token: string;
+  timestamp?: number;
+}
+
+interface AuthenticationErrorMessage {
+  errorMessage: string;
+}
+
+class TokenError extends Error {
+  constructor (message?: string) {
+    super(message);
+    this.name = 'InvalidToken';
+  }
+}
+
+interface User {
+  email: string;
+  password: string;
+}
+
+
+
+
+
+
+
+
+
+
+
