@@ -23,13 +23,19 @@ In progress
 MODULE2_PART2_GALLERY
 |
 |__build
-|       |__client
-|       |__server
+|       |__frontend
+|       |__backend
 |    
 |
-|__src
-      |__client
-      |__server
+|__frontend
+|         |__src
+|         |__package.json
+|         |__tsconfig.json
+|
+|__backend
+          |__src
+          |__package.json
+          |__tsconfig.json
 
 ```
 
@@ -37,7 +43,7 @@ MODULE2_PART2_GALLERY
 
 1. Download project folder
 
-2. Run 'npm run start' command 
+2. Run `npm run start` command 
 
 3. Enter `localhost:5000` in your browser search bar
 
