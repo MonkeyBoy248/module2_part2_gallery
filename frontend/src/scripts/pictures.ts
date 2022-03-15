@@ -146,7 +146,6 @@ function redirectWhenTokenExpires (delay: number): void {
 
 function setPageNumber () {
   const currentActiveLink = pagesLinksList.querySelector('.active');
-  console.log(pagesLinksList);
   
   for (let item of pagesLinksList.children) {
     const link = item.querySelector('a');
@@ -176,16 +175,19 @@ function changeCurrentPage (e: Event): void {
   const currentActiveLink = pagesLinksList.querySelector('.active');
   e.preventDefault();
   const target = e.target as HTMLElement;
+  console.log(target);
   const targetClosestLi = target.closest('li');
 
-  if (currentActiveLink !== targetClosestLi) {
-    setNewUrl(targetClosestLi?.getAttribute('page-number')!);
-    getPicturesData(`${galleryServerUrl}?page=${currentUrl.searchParams.get('page')}`);
-    
-    currentActiveLink?.classList.remove('active');
-    target.classList.add('active');
-
-    redirectWhenTokenExpires(5000);
+  if (target !== pagesLinksList ) {
+    if (currentActiveLink !== targetClosestLi) {
+      setNewUrl(targetClosestLi?.getAttribute('page-number')!);
+      getPicturesData(`${galleryServerUrl}?page=${currentUrl.searchParams.get('page')}`);
+      
+      currentActiveLink?.classList.remove('active');
+      target.classList.add('active');
+  
+      redirectWhenTokenExpires(5000);
+    }
   }
 }
 
