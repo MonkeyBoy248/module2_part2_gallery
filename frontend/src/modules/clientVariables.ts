@@ -23,7 +23,7 @@ class ListenerRemover {
 
 function redirectToTheGalleryPage () {
   const currentPage = currentUrl.searchParams.get('currentPage');
-  
+
   if (!currentPage) {
     window.location.replace(`${galleryUrl}?page=1`)
   } else {
@@ -38,8 +38,10 @@ class Token {
     return JSON.parse(localStorage.getItem(Token.TOKEN_KEY) || 'null');
   }
   
-  static getTokenTimestamp (): number {
-    return JSON.parse(localStorage.getItem(Token.TOKEN_KEY) || 'null');
+  static getTokenTimestamp (): number | undefined {
+    const tokenObj: TokenObject = JSON.parse(localStorage.getItem(Token.TOKEN_KEY) || 'null');
+
+    return tokenObj?.timestamp;
   }
   
   static setToken (token: TokenObject): void {
@@ -48,8 +50,12 @@ class Token {
   }
   
   static deleteToken (): void {
-    if (Date.now() - Token.getTokenTimestamp() >= 600000) {
-      localStorage.removeItem(Token.TOKEN_KEY);
+    const timestamp = Token.getTokenTimestamp();
+
+    if (typeof timestamp === 'number') {
+      if (Date.now() - timestamp >= 600000) {
+        localStorage.removeItem(Token.TOKEN_KEY);
+      }
     }
   }
 }
