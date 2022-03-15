@@ -2,11 +2,12 @@
   "name": "module2_part2_gallery",
   "version": "1.0.0",
   "description": "![GitHub issues](https://img.shields.io/github/issues/MonkeyBoy248/module2_part1_gallery) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/MonkeyBoy248/module2_part1_gallery)",
-  "main": "./build/index.js",
+  "main": "../build/backend/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.ts",
-    "start": "tsc && nodemon build/index.js"
+    "dev": "nodemon ./src/index.ts",
+    "start": "cd frontend && tsc && cd .. && cd backend && tsc && nodemon build/backend/src/index.js"
+    
   },
   "author": "Kirill Temnyi",
   "license": "ISC",
@@ -14,5 +15,8 @@
     "@types/node": "^17.0.21",
     "nodemon": "^2.0.15",
     "ts-node": "^10.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0"
   }
 }
