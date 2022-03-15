@@ -1,4 +1,4 @@
-import { PageFileReader as reader} from './server/routes/pageFileReader';
+import { PageFileReader as reader} from './server/static/pageFileReader';
 import { createServer } from "http";
 import { parse } from "url";
 import { Authentication } from "./server/components/authentication/authentication";
