@@ -13,13 +13,9 @@ const authenticationEventsArray: CustomEventListener[] = [
 
 type AuthenticationResponse = TokenObject | AuthenticationErrorMessage;
 
-interface User {
-  email: string;
-  password: string;
-}
-
 function validateField (field: HTMLInputElement, pattern: RegExp, text: string): void {
   const targetErrorContainer = loginForm!.querySelector(`.login-form__${field.name}-error-message`) as HTMLElement;
+
   targetErrorContainer.textContent = '';
   submitButton.disabled = false;
   submitButton.classList.remove('_disabled')
@@ -88,7 +84,7 @@ async function submitForm (e: Event) {
   
   if (Token.getToken()) {
     ListenerRemover.removeEventListeners(authenticationEventsArray);
-     redirectToTheGalleryPage();
+    redirectToTheGalleryPage();
   }
   
   emailInput.value = '';
@@ -100,11 +96,8 @@ function resetErrorMessage () {
 }
 
 emailInput.addEventListener('input', validateEmailInput);
-
 passwordInput.addEventListener('change', validatePasswordInput);
-
 loginForm!.addEventListener('submit', submitForm);
-
 loginForm!.addEventListener('focusin', resetErrorMessage);
 
 

@@ -8,6 +8,7 @@ export class Authentication {
     if (!authorized[user.email]) {
       return false;
     }
+    
     if (authorized[user.email] !== user.password) {
       return false;
     }

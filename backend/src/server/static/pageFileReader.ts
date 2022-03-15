@@ -7,24 +7,26 @@ const isNodeError = (error: Error | unknown): error is NodeJS.ErrnoException =>
   error instanceof Error
 
 export class PageFileReader {
- 
-  private static async readerErrorHandler (err: NodeJS.ErrnoException, res: ServerResponse) {  
+  private static async readerErrorHandler (err: NodeJS.ErrnoException) {  
     if (err.code === 'ENOENT') {
       const content = await reader(path.join(__dirname.slice(0, __dirname.indexOf('/build')), 'frontend', 'src', 'pages', 'views', '404.html'));
+
       return content;
-    } else {
-      return `Server error: ${err.code}`;
-    }
+    } 
+
+    return `Server error: ${err.code}`;
   }
   
   private static async readPageFile (filePath: string, res: ServerResponse, contentType: string | undefined) {
     try {
       const fileContent = await reader(filePath);
+
       res.writeHead(200, { 'Content-Type': contentType })
       res.end(fileContent, 'utf-8');
     } catch (err) {
       if (isNodeError(err)) {
-        const errorResponse = await PageFileReader.readerErrorHandler(err, res);
+        const errorResponse = await PageFileReader.readerErrorHandler(err);
+
         typeof errorResponse === 'string' ? res.writeHead(500) : res.writeHead(200, { 'Content-Type': contentType });
         res.end(errorResponse, 'utf-8');
       }
@@ -81,6 +83,7 @@ export class PageFileReader {
           contentType = 'application/javascript'
           break
       }
+      
       PageFileReader.readPageFile(filePath, res, contentType);
     }
   }

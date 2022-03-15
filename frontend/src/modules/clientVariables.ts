@@ -23,6 +23,7 @@ class ListenerRemover {
 
 function redirectToTheGalleryPage () {
   const currentPage = currentUrl.searchParams.get('currentPage');
+  
   if (!currentPage) {
     window.location.replace(`${galleryUrl}?page=1`)
   } else {

@@ -51,6 +51,7 @@ const server = createServer((req, res) => {
 
             if (currentPage <= totalPagesAmount && currentPage > 0) {
               const response = pictures.createGalleryResponse(pictureNames, totalPagesAmount, currentPage);
+              
               res.writeHead(200, {'Content-Type': 'application/json'});
               res.end(JSON.stringify(response));
             }

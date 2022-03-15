@@ -162,9 +162,9 @@ function setPageNumber () {
 }
 
 function getCurrentPageImages (): void {
-  if(!currentUrl.searchParams.get('page')) {
+  if (!currentUrl.searchParams.get('page')) {
     getPicturesData(`${galleryServerUrl}?page=1`)
-  }else {
+  } else {
     getPicturesData(`${galleryServerUrl}?page=${currentUrl.searchParams.get('page')}`);
   }
 
@@ -173,9 +173,10 @@ function getCurrentPageImages (): void {
 
 function changeCurrentPage (e: Event): void {
   const currentActiveLink = pagesLinksList.querySelector('.active');
-  e.preventDefault();
   const target = e.target as HTMLElement;
   const targetClosestLi = target.closest('li');
+
+  e.preventDefault();
 
   if (target !== pagesLinksList ) {
     if (currentActiveLink !== targetClosestLi) {

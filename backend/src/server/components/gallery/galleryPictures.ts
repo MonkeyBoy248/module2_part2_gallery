@@ -8,6 +8,7 @@ export class Pictures {
 
   static async getPictures () {
     const fileNames = await fs.promises.readdir(Pictures.API_IMAGES_PATH);
+    
     return fileNames;
   }
   

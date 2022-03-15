@@ -1,4 +1,5 @@
 const homeLink = document.querySelector('.content__home-link');
+
 homeLink?.addEventListener('click', homeRedirection);
 
 function homeRedirection (e: Event) {
