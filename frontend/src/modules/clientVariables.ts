@@ -1,4 +1,4 @@
-const port = 5000;
+const port = 8080;
 const protocol = 'http';
 const hostName = 'localhost';
 const authenticationServerUrl = `${protocol}://${hostName}:${port}/authentication`;
