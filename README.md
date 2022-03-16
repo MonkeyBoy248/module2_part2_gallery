@@ -45,7 +45,7 @@ MODULE2_PART2_GALLERY
 
 2. Run `npm run start` command 
 
-3. Enter `localhost:5000` in your browser search bar
+3. Enter `localhost:8080` in your browser search bar
 
 4. You have to log in. After filling the fields in click log in button to authorize
 
