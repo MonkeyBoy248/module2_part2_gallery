@@ -9,7 +9,6 @@ import { config } from "dotenv";
 
 config();
 
-
 const server = createServer((req, res) => {
   reader.getTargetPageFile(req, res);
 
@@ -43,7 +42,7 @@ const server = createServer((req, res) => {
       if (req.headers.authorization === 'token') {
         const requestUrlParams = parse(req.url, true).query;
         let currentPage = requestUrlParams['page'] ? Number(requestUrlParams['page']) : 1;
-
+        
         pictures.getPictures()
           .then(fileNames => {
             const pictureNames = fileNames;
@@ -65,6 +64,3 @@ const server = createServer((req, res) => {
 })
 
 server.listen(Number(process.env.PORT) || 8080);
-
-
-

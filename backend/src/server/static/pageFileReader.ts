@@ -33,10 +33,14 @@ export class PageFileReader {
     }
   }
   
-  private static getCorrectPath (req: string): string {
+  private static getCorrectPath (req: string): string | boolean {
     const filteredRequest = req.includes('?') ? req.slice(0, req.lastIndexOf('?')) : req;
     const extension = filteredRequest.slice(req.indexOf('.'));
     let filePath = filteredRequest;
+
+    if (!req.includes('.') && req !== '/') {
+      return false;
+    }
 
     switch(extension) {
       case '.html':
@@ -54,37 +58,41 @@ export class PageFileReader {
     if (req.url) {
       let contentType = 'text/html';
       const requestedFileName = PageFileReader.getCorrectPath(req.url);
-      const filePath = path.join(__dirname.slice(0, __dirname.indexOf('/build')), req.url === '/' ? 'frontend/src/pages/views/authentication.html' : `${requestedFileName}`);
-      const fileExtension = path.extname(filePath);
-  
-      switch(fileExtension) {
-        case '.js':
-          contentType = 'text/javascript';
+
+        if (requestedFileName) {
+          const filePath = path.join(__dirname.slice(0, __dirname.indexOf('/build')), req.url === '/' ? 'frontend/src/pages/views/authentication.html' : `${requestedFileName}`);
+        console.log(filePath);
+        const fileExtension = path.extname(filePath);
+    
+        switch(fileExtension) {
+          case '.js':
+            contentType = 'text/javascript';
+            break
+          case '.css':
+            contentType = 'text/css';
+            break
+          case '.json':
+            contentType = 'application/json';
+            break 
+          case '.png': 
+            contentType = 'image/png';
+            break
+          case '.jpg': 
+            contentType = 'image/jpeg';
+            break
+          case '.jpeg': 
+            contentType = 'image/jpeg';
           break
-        case '.css':
-          contentType = 'text/css';
+          case '.webp':
+            contentType = 'image/webp';
           break
-        case '.json':
-          contentType = 'application/json';
-          break 
-        case '.png': 
-          contentType = 'image/png';
-          break
-        case '.jpg': 
-          contentType = 'image/jpeg';
-          break
-        case '.jpeg': 
-          contentType = 'image/jpeg';
-        break
-        case '.webp':
-          contentType = 'image/webp';
-        break
-        case '':
-          contentType = 'application/javascript'
-          break
-      }
-      
-      PageFileReader.readPageFile(filePath, res, contentType);
+          case '':
+            contentType = 'application/javascript'
+            break
+        }
+
+        PageFileReader.readPageFile(filePath, res, contentType);
+      } 
     }
   }
 }
