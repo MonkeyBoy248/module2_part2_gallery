@@ -4,3 +4,4 @@ node_modules
 build/
 .editorconfig
 .env
+.DS_Store
