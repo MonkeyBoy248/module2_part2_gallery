@@ -200,7 +200,6 @@ setInterval(() => {
   redirectWhenTokenExpires(5000);
 }, 60000)
 
-console.log(Token.getTokenTimestamp());
 
 
 
