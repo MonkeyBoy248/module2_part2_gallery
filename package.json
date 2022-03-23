@@ -2,11 +2,20 @@
   "name": "module2_part2_gallery",
   "version": "1.0.0",
   "description": "![GitHub issues](https://img.shields.io/github/issues/MonkeyBoy248/module2_part1_gallery) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/MonkeyBoy248/module2_part1_gallery)",
-  "main": "../build/backend/index.js",
+  "main": "build/backend/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/index.ts",
-    "start": "cd frontend && tsc && cd .. && cd backend && tsc && nodemon build/backend/src/index.js"
+    "copy:resourses": "cp -r ./resourses build/resources",
+    "copy:pages": "cd frontend/ && cp -r ./src/pages ../build/frontend",
+    "rm-build:frontend": "cd frontend/ && rm -R build",
+    "rm-build:backend": "cd backend/ && rm -R build",
+    "rm-build": "npm run rm-build:frontend && npm run rm-build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "build:all": "npm run build:frontend && npm run build:backend",
+    "build": "chmod 777 build.sh && ./build.sh",
+    "start": "npm run build && nodemon build/backend/src/index.js"
   },
   "author": "Kirill Temnyi",
   "license": "ISC",
