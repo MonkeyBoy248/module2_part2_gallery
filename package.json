@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/index.ts",
-    "copy:resourses": "cp -r ./resourses build/resources",
+    "copy:resources": "cp -r resources build/resources",
     "copy:pages": "cd frontend/ && cp -r ./src/pages ../build/frontend",
     "rm-build:frontend": "cd frontend/ && rm -R build",
     "rm-build:backend": "cd backend/ && rm -R build",
