@@ -1,9 +1,10 @@
 import * as fs from 'fs';
+import path from 'path/posix';
 import { Gallery } from './galleryInterface';
 
 
 export class Pictures {
-  private static API_IMAGES_PATH: string = '/Users/user/projects/module2/module2_part2_gallery/resources/api_images';
+  private static API_IMAGES_PATH: string = path.join(__dirname, '..', '..', '..', '..', '..', 'resources', 'api_images');
   private static PICTURES_PER_PAGE: number = 4;
 
   static async getPictures () {
