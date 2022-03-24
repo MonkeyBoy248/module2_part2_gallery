@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/index.ts",
     "copy:resources": "cp -r resources build/resources",
-    "copy:pages": "cd frontend/ && cp -r ./src/pages ../build/frontend",
+    "copy:pages": "cd frontend/ && cp -r ./src/pages ../build/frontend/src",
     "rm-build:frontend": "cd frontend/ && rm -R build",
     "rm-build:backend": "cd backend/ && rm -R build",
     "rm-build": "npm run rm-build:frontend && npm run rm-build:backend",
