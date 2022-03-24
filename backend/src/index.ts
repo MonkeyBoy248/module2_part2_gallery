@@ -10,8 +10,8 @@ import { config } from "dotenv";
 config();
 
 const server = createServer((req, res) => {
-  reader.getTargetPageFile(req, res);
-
+  const requestBase = `${process.env.PROTOCOL}://${req.headers.host}`;
+  
   if (req.url === '/authentication') {
     if (req.method === 'POST') {
       let body: User = {
@@ -37,12 +37,13 @@ const server = createServer((req, res) => {
     }
   }
 
-  if (req.url?.includes('/gallery')) {
+  if (new URL(req.url!, requestBase).pathname === '/gallery') {
+    console.log(new URL(req.url!, `${process.env.PROTOCOL}://${req.headers.host}`));
     if (req.method === 'GET') {
       if (req.headers.authorization === 'token') {
-        const requestUrlParams = parse(req.url, true).query;
+        const requestUrlParams = parse(req.url!, true).query;
         let currentPage = requestUrlParams['page'] ? Number(requestUrlParams['page']) : 1;
-        
+
         pictures.getPictures()
           .then(fileNames => {
             const pictureNames = fileNames;
@@ -61,6 +62,8 @@ const server = createServer((req, res) => {
       }
     }
   }   
+
+  reader.getTargetPageFile(req, res);
 })
 
 server.listen(Number(process.env.PORT) || 8080);
