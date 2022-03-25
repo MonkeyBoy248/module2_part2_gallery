@@ -9,7 +9,7 @@ const isNodeError = (error: Error | unknown): error is NodeJS.ErrnoException =>
 export class PageFileReader {
   private static async readerErrorHandler (err: NodeJS.ErrnoException) {  
     if (err.code === 'ENOENT') {
-      const content = await reader(path.join(__dirname.slice(0, __dirname.indexOf('/build')), 'frontend', 'src', 'pages', 'views', '404.html'));
+      const content = await reader(path.join(__dirname, '..', '..', '..', '..', 'frontend', 'src', 'pages', 'views', '404.html'));
 
       return content;
     } 
@@ -60,7 +60,7 @@ export class PageFileReader {
       const requestedFileName = PageFileReader.getCorrectPath(req.url);
 
         if (requestedFileName) {
-          const filePath = path.join(__dirname.slice(0, __dirname.indexOf('/build')), req.url === '/' ? 'frontend/src/pages/views/authentication.html' : `${requestedFileName}`);
+          const filePath = path.join(__dirname, '..', '..', '..', '..', req.url === '/' ? 'frontend/src/pages/views/authentication.html' : `${requestedFileName}`);
         console.log(filePath);
         const fileExtension = path.extname(filePath);
     
